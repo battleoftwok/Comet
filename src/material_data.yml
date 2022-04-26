@@ -1,0 +1,123 @@
+
+# В этом файле характеристика материалов
+
+Металл:
+  Марка:
+
+    30ХГСА:
+      ro: 7850
+      gamma: 76930
+      sigma_в: 1100
+      E: 210000
+      L: 14.0
+      epsilon: 0.52
+    D16AT:
+      ro: 2800
+      gamma: 27440
+      sigma_в: 420
+      E: 72000
+      L: 15.2
+      epsilon: 0.58
+    OT-4:
+      ro: 4500
+      gamma: 44100
+      sigma_в: 700
+      E: 110000
+      L: 15.5
+      epsilon: 0.64
+    B95:
+      ro: 2800
+      gamma: 27440
+      sigma_в: 640
+      E: 72000
+      L: 22.8
+      epsilon: 0.88
+    BT20:
+      ro: 4500
+      gamma: 44100
+      sigma_в: 1000
+      E: 110000
+      L: 22
+      epsilon: 0.9
+Композит:
+  Марка:
+    КМУ-7Т2А:
+      ro: 1520
+      gamma: 14896
+      delta: 0.2
+      sigma_в: 1570
+      E: 133000
+      L: 105
+      epsilon: 1.18
+    КМУ-7тр:
+      ro: 1520
+      gamma: 14896
+      delta: 0.23
+      sigma_в: 600
+      E: 64400
+      L: 40
+      epsilon: 0.93
+    КМУ-2м.120.Э01:
+      ro: 1500
+      gamma: 14700
+      delta: 0.12
+      sigma_в: 900
+      E: 115000
+      L: 61
+      epsilon: 0.78
+    КМУ-4э:
+      ro: 1450
+      gamma: 14210
+      delta: 0.09
+      sigma_в: 900
+      E: 120000
+      L: 63
+      epsilon: 0.75
+    КМУ-7л:
+      ro: 1550
+      gamma: 15190
+      delta: 0.13
+      sigma_в: 970
+      E: 215000
+      L: 64
+      epsilon: 0.45
+    КМУ-7Т1А:
+      ro: 1520
+      gamma: 14896
+      delta: 0.25
+      sigma_в: 1400
+      E: 133000
+      L: 94
+      epsilon: 1.05
+    КМУ-7э:
+      ro: 1520
+      gamma: 14896
+      delta: 0.12
+      sigma_в: 900
+      E: 135000
+      L: 105
+      epsilon: 0.66
+    КМУ-11э:
+      ro: 1520
+      gamma: 14700
+      delta: 0.12
+      sigma_в: 900
+      E: 120000
+      L: 61
+      epsilon: 0.75
+    КМУ-11тр:
+      ro: 1530
+      gamma: 14210
+      delta: 0.22
+      sigma_в: 630
+      E: 70000
+      L: 63
+      epsilon: 0.9
+    КМУ-7э-0,1:
+      ro: 1520
+      gamma: 14896
+      delta: 0.1
+      sigma_в: 1130
+      E: 142000
+      L: 63
+      epsilon: 0.8

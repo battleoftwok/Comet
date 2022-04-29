@@ -14,10 +14,6 @@ class InputDataControl:
         self.task_number = task_number
         self.group_name = group_number
 
-        # print(self.get_material_num())
-        # print(self.parse_metal_num())
-        # print(self.parse_composite_num())
-
     def __call__(self, *args, **kwargs):
         return None
 
@@ -30,10 +26,6 @@ class InputDataControl:
         for dictionary in dictionaries:
             if value == dictionary["№"]:
                 return dictionary
-
-        # for metal, composite in zip(self.get_metal_info(), self.get_composite_info()):
-        #     if metal.values()["№"] == index_metal and composite["№"] == index_composite:
-        #         return self.get_metal_info()[index_metal], self.get_composite_info()[index_composite]
 
     def get_composite_indexes(self) -> list:
         composite_elem = self.get_material_num()[1].split("-")
@@ -56,12 +48,17 @@ class InputDataControl:
 
         return shelf_materials_index, panel_materials_index
 
-    def get_group_info(self) -> dict:
+    def get_group_info(self):
         """
         Возвращает информацию о том, какие материалы необходимо
         использовать для конкретного варианта задания
         """
-        return self.get_variant_info()[f"М1О-{self.group_name}"]
+        try:
+            return self.get_variant_info()[f"М1О-{self.group_name}"]
+
+        except Exception:
+            raise KeyError("Данной группы не существует!")
+
 
     def get_variant_info(self) -> dict:
         """

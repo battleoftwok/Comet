@@ -152,12 +152,18 @@ class EffortDistributionMethod(Methods):
 
         # для повышения читабельности формул:
         N = self.strength_fact["N"]
-        E1 = self.metal_elem.material_params["E"] * FACTOR
-        E2 = self.composite_elem.material_params["E"] * FACTOR
+        E1 = self.metal_elem.material_params["E"]
+        E2 = self.composite_elem.material_params["E"]
         h1 = self.metal_elem.thickness
         h2 = self.composite_elem.width
 
         return N * (E1 * h1 / (E1 * h1 + E2 * h2)), N * (E2 * h2 / (E1 * h1 + E2 * h2))
+
+    def original_belt_thickness(self) -> float:
+        """
+        Исходная ширина пояса h_исх
+        """
+        return FACTOR * self.strength_fact["N"] / self.metal_elem.material_params["sigma_в"]
 
 
 class JointDeformationMethod(Methods):

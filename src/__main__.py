@@ -211,7 +211,7 @@ class EffortDistributionMethod(Methods):
         Returns: погонные усилия N1 и N2
         """
 
-        return round(self.N * self.E1 * self.h1 / self.summa_E_h(), SIGN),\
+        return round(self.N * self.E1 * self.h1 / self.summa_E_h(), SIGN), \
                round(self.N * self.E2 * self.h2 / self.summa_E_h(), SIGN)
 
     def thickness(self) -> tuple:
@@ -269,14 +269,25 @@ class CreateTable:
         table = Table(self.data, colWidths=[self.font_size + 55 for _ in range(len(self.data[0]))],
                       rowHeights=[self.font_size + 10 for _ in range(len(self.data))])
 
-        table_style = TableStyle([("BOX", (0, 0), (-1, -1), 2, colors.black),
-                                  ("GRID", (0, 0), (-1, -1), 1, colors.black),
-                                  ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
-                                  ("ALIGN", (0, 0), (-1, -1), "CENTER"),
-                                  ("FONTNAME", (0, 0), (-1, -1), self.font_name),
-                                  ("TEXTCOLOR", (0, 0), (len(self.data[0]), 0), colors.green),
-                                  ("FONTNAME", (0, 0), (len(self.data[0]), 0), "DejaVuSerif"),
-                                  ("FONTSIZE", (0, 0), (-1, -1), self.font_size)])
+        list_style = [("BOX", (0, 0), (-1, -1), 2, colors.black),
+                      ("GRID", (0, 0), (-1, -1), 1, colors.black),
+                      ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+                      ("ALIGN", (0, 0), (-1, -1), "CENTER"),
+                      ("FONTNAME", (0, 0), (-1, -1), self.font_name),
+                      ("TEXTCOLOR", (0, 0), (len(self.data[0]), 0), colors.green),
+                      ("FONTNAME", (0, 0), (len(self.data[0]), 0), "DejaVuSerif"),
+                      ("FONTSIZE", (0, 0), (-1, -1), self.font_size)]
+
+        add_list_style = \
+            list([('SPAN', (5, i), (5, j)) for i, j in zip(range(1, len(self.data), 3),
+                                                           range(2, len(self.data) + 1, 3))])
+
+        add_two_style = list([('SPAN', (0, i), (len(self.data[0]) - 1, i)) for i in range(3, len(self.data), 3)])
+
+        list_style += add_list_style
+        list_style += add_two_style
+
+        table_style = TableStyle(list_style)
 
         table.setStyle(table_style)
         elements.append(table)
@@ -288,14 +299,13 @@ class CreateTable:
 
 
 def run(task_num: int = 7, group_num: int = 402):
-
     styles = getSampleStyleSheet()
     styles['Normal'].fontName = 'DejaVuSerif'
     styles['Heading1'].fontName = 'DejaVuSerif'
 
     pdfmetrics.registerFont(TTFont('DejaVuSerif', 'DejaVuSerif.ttf', 'UTF-8'))
 
-    output_data = [["Элемент","Марка", "E, MPa", "σ_b, MPa", "h, mm", "Σ E*h, N/mm", "Ni, N/mm", "σ_i, MPa", "ηi"]]
+    output_data = [["Элемент", "Марка", "E, МПа", "σ_b, МПа", "h, мм", "ΣE*h, Н/мм", "Ni, Н/мм", "σ_i, МПа", "ηi"]]
 
     metals = GetMaterialsData("material_data.yml", "Металл")
     composite = GetMaterialsData("material_data.yml", "Композит")
@@ -320,4 +330,4 @@ def run(task_num: int = 7, group_num: int = 402):
 
 
 if __name__ == '__main__':
-    run(1, 402)
+    run(1, 401)

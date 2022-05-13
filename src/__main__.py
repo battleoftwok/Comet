@@ -1,7 +1,6 @@
 from abc import abstractmethod, ABC
 from dataclasses import dataclass
 from pdfs import pdfs
-from plot import *
 import yaml
 
 FACTOR = 10 ** 6
@@ -637,11 +636,9 @@ def run(task_num: int = 7, group_num: int = 402):
     pdf.add_table_three_method(data_table_six_method(data_one, output_data_6),
                                " ", " 3. Метод редукционных коэффициентов.")
 
-    create_plot(data_table_one_method(data_one, output_data_1))
-
     pdf.run()
 
 
 if __name__ == '__main__':
-    for j in range(1, 6):
-        run(j, 402)
+
+    run(7, 402)

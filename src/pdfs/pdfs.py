@@ -3,19 +3,21 @@ from reportlab.platypus import SimpleDocTemplate, Image, Paragraph
 from reportlab.lib.enums import TA_CENTER, TA_LEFT
 from reportlab.platypus import Table, TableStyle
 from reportlab.rl_config import defaultPageSize
-from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.pdfbase import pdfmetrics
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import inch
 from reportlab.lib import colors
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
 
-FONT = "DejaVuSerif"
-FONTSIZE = 9
+
+FONT = "Times"
+FONTSIZE = 12
 PAGE_HEIGHT = defaultPageSize[1]
 PAGE_WIDTH = defaultPageSize[0]
 
+pdfmetrics.registerFont(TTFont(FONT, f'{FONT}.ttf', 'UTF-8'))
+
 # "русификатор":
-pdfmetrics.registerFont(TTFont('DejaVuSerif', 'DejaVuSerif.ttf', 'UTF-8'))
 
 styles = getSampleStyleSheet()
 
@@ -113,7 +115,7 @@ class CreateReport:
                       ("ALIGN", (0, 0), (-1, -1), "CENTER"),
                       ("FONTNAME", (0, 0), (-1, -1), FONT),
                       ("TEXTCOLOR", (0, 0), (len(data[0]), 0), colors.green),
-                      ("FONTNAME", (0, 0), (len(data[0]), 0), "DejaVuSerif"),
+                      ("FONTNAME", (0, 0), (len(data[0]), 0), FONT),
                       ("FONTSIZE", (0, 0), (-1, -1), FONTSIZE)]
 
         add_list_style = \
@@ -176,7 +178,7 @@ class CreateReport:
                       ("ALIGN", (0, 0), (-1, -1), "CENTER"),
                       ("FONTNAME", (0, 0), (-1, -1), FONT),
                       ("TEXTCOLOR", (0, 0), (len(data[0]), 0), colors.green),
-                      ("FONTNAME", (0, 0), (len(data[0]), 0), "DejaVuSerif"),
+                      ("FONTNAME", (0, 0), (len(data[0]), 0), FONT),
                       ("FONTSIZE", (0, 0), (-1, -1), FONTSIZE)]
 
         add_list_style = \
@@ -249,7 +251,7 @@ class CreateReport:
                       ("ALIGN", (0, 0), (-1, -1), "CENTER"),
                       ("FONTNAME", (0, 0), (-1, -1), FONT),
                       ("TEXTCOLOR", (0, 0), (len(data[0]), 0), colors.green),
-                      ("FONTNAME", (0, 0), (len(data[0]), 0), "DejaVuSerif"),
+                      ("FONTNAME", (0, 0), (len(data[0]), 0), FONT),
                       ("FONTSIZE", (0, 0), (-1, -1), FONTSIZE)]
 
         add_list_style_two = \

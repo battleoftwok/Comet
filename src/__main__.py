@@ -51,7 +51,7 @@ class GetVariantData(InputData):
             return yaml.load(file, Loader=yaml.Loader)["Задание"]
 
     @staticmethod
-    def get_KAP_variants(file_name: str):
+    def get_kap_variants(file_name: str):
         with open(file_name, "r", encoding="utf-8") as file:
             return yaml.load(file, Loader=yaml.Loader)
 
@@ -65,7 +65,7 @@ class GetVariantData(InputData):
     def get_strength_factors(self) -> dict:
         for variant in self.read_file_data():
             if self.task_num == variant["№ задания"]:
-                return self.get_KAP_variants("KAP_variants.yml")[variant["по задачнику КАП"]]
+                return self.get_kap_variants("KAP_variants.yml")[variant["по задачнику КАП"]]
 
     def get_list_metals(self) -> list:
         return list(map(int, self.__search_materials_info()["эл. 1"].split(sep=",")))
@@ -230,8 +230,8 @@ class EffortDistributionMethod(Methods):
         Returns: погонные усилия N1 и N2
         """
 
-        return round(self.N * self.E1 * self.h1 / self.summa_E_h(), SIGN), \
-               round(self.N * self.E2 * self.h2 / self.summa_E_h(), SIGN)
+        return round(self.N * self.E1 * self.h1 / self.summa_e_h(), SIGN), \
+            round(self.N * self.E2 * self.h2 / self.summa_e_h(), SIGN)
 
     def thickness(self) -> tuple:
 
@@ -250,7 +250,7 @@ class EffortDistributionMethod(Methods):
                             f" c {self.composite_elem.__class__.__name__}!"
                             " Если очень хочешь, то добавь изменения в код!")
 
-    def summa_E_h(self) -> float:
+    def summa_e_h(self) -> float:
         return round(self.E1 * self.h1 + self.E2 * self.h2, SIGN)
 
 
@@ -315,7 +315,7 @@ class JointDeformationMethod(Methods):
         """
 
         return round(self.sigma_x * self.E1 / self.E_x, SIGN), \
-               round(self.sigma_x * self.E2 / self.E_x, SIGN)
+            round(self.sigma_x * self.E2 / self.E_x, SIGN)
 
     def linear_load(self) -> float:
 
@@ -341,7 +341,7 @@ class JointDeformationMethod(Methods):
         """
 
         return round(self.N * self.E1 * self.h1_ / self.E_x, SIGN), \
-               round(self.N * self.E2 * self.h2_ / self.E_x, SIGN)
+            round(self.N * self.E2 * self.h2_ / self.E_x, SIGN)
 
     def thickness(self) -> tuple:
 
@@ -360,7 +360,7 @@ class JointDeformationMethod(Methods):
                             f" c {self.composite_elem.__class__.__name__}!"
                             " Если очень хочешь, то добавь изменения в код!")
 
-    def summa_E_h(self) -> float:
+    def summa_e_h(self) -> float:
         return round(self.E1 * self.h1 + self.E2 * self.h2, SIGN)
 
 
@@ -460,7 +460,7 @@ def data_table_one_method(input_data: GetVariantData, output_data: list):
             solution = EffortDistributionMethod(shelf, panel, input_data.get_strength_factors())
 
             output_data.append(["полка", solution.metal_grade, solution.E1, solution.sigma_b, solution.h1,
-                                solution.summa_E_h(), solution.N1, solution.sigma_1, solution.safety_factor()[0],
+                                solution.summa_e_h(), solution.N1, solution.sigma_1, solution.safety_factor()[0],
                                 solution.metal_epsilon])
 
             output_data.append(["панель", solution.composite_grade, solution.E2, solution.sigma_1b, solution.h2,
@@ -487,7 +487,7 @@ def data_table_four_method(input_data: GetVariantData, output_data: list):
             solution = EffortDistributionMethod(shelf, panel, input_data.get_strength_factors())
 
             output_data.append(["полка", solution.metal_grade, solution.E1, solution.sigma_b, solution.h1,
-                                solution.summa_E_h(), solution.N1, solution.sigma_1, solution.safety_factor()[0],
+                                solution.summa_e_h(), solution.N1, solution.sigma_1, solution.safety_factor()[0],
                                 solution.metal_epsilon])
 
             output_data.append(["панель", solution.composite_grade, solution.E2, solution.sigma_1b, solution.h2,
